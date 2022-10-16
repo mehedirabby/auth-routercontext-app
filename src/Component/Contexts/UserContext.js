@@ -1,10 +1,26 @@
-import React, { Children, createContext } from "react";
+import { getSpaceUntilMaxLength } from "@testing-library/user-event/dist/utils";
+import React, { Children, createContext, useState } from "react";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import app from "../Firebase/firebase.config";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
+const auth = getAuth(app);
 
 const UserContext = ({ children }) => {
-  const user = { displayName: "akash" };
-  const authInfo = { user };
+  const [user, setUser] = useState({ displayName: "akash" });
+
+  const createUser = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+  const signIn = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  const authInfo = { user, createUser, signIn };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
