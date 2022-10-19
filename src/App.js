@@ -15,7 +15,12 @@ function App() {
       children: [
         {
           path: "/",
-          element: <Home></Home>,
+          element: (
+            <PrivateRout>
+              {" "}
+              <Home></Home>
+            </PrivateRout>
+          ),
         },
         {
           path: "/login",
