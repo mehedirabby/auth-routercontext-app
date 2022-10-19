@@ -4,6 +4,8 @@ import Main from "./Layout/Main";
 import Home from "./Component/Home";
 import Login from "./Component/Login";
 import Register from "./Component/Register";
+import PrivateRout from "./Routes/PrivateRout";
+import Orders from "./Component/Orders";
 
 function App() {
   const router = createBrowserRouter([
@@ -18,6 +20,14 @@ function App() {
         {
           path: "/login",
           element: <Login></Login>,
+        },
+        {
+          path: "/orders",
+          element: (
+            <PrivateRout>
+              <Orders></Orders>
+            </PrivateRout>
+          ),
         },
         {
           path: "/register",
